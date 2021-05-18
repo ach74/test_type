@@ -1,0 +1,95 @@
+<h2>{{ titulo }}</h2>
+
+<p>Nueva marca</p>
+
+<input type="text" [(ngModel)]="mi_marca" (keyup.enter)="mostarTexto()" />
+
+<button (click)="getMarca()">Mostrar Marca</button>
+<button (click)="addMarca()">Add Marca</button>
+
+<br />
+
+<strong>{{ mi_marca }}</strong>
+
+<br />
+<br />
+<p>Compra las zapatillas de las mejores marcas</p>
+
+<ul>
+  <li *ngFor="let marca of marcas; let indice = index">
+    {{ indice + " - " + marca }}
+    <button (click)="borrarMarca(indice)">Borrar</button>
+  </li>
+</ul>
+
+<p>Las zapatillas que tenemos son:</p>
+<ul>
+  <li *ngFor="let dep of zapatillas">
+    <span
+      [ngStyle]="{
+        'text-decoration': !dep.stock ? 'line-through' : 'none'
+      }"
+    >
+      {{ dep.nombre }} -
+      <strong
+        [class.altoPrecio]="dep.precio >= 80"
+        [ngClass]="{
+          'fondoRojo' : dep.precio > 100,
+          'subrayado' : dep.marca == 'Nike'}"
+      >
+        {{ dep.precio }}
+      </strong>
+      $
+    </span>
+
+    <span
+      *ngIf="dep.precio < 80"
+      [style.background]="dep.precio < 80 ? 'red' : ''"
+      [style.color]="dep.precio < 80 ? 'white' : ''"
+    >
+      OFERTA !!</span
+    >
+  </li>
+</ul>
+
+<p>El color de la mayoria de nuestras zapatillas es :</p>
+
+<input type="text" [(ngModel)]="color" />
+<ul [ngSwitch]="color">
+  <li *ngSwitchCase="'red'">
+    El color predominante es el
+    <span
+      [ngStyle]="{
+        background: color
+      }"
+      >rojo</span
+    >
+  </li>
+  <li *ngSwitchCase="'blue'">
+    El color predominante es el azul
+    <span
+      [ngStyle]="{
+        background: color
+      }"
+      >azul</span
+    >
+  </li>
+  <li *ngSwitchCase="'yellow'">
+    El color predominante es el amarillo
+    <span
+      [ngStyle]="{
+        background: color
+      }"
+      >amarillo</span
+    >
+  </li>
+  <li *ngSwitchCase="'orange'">
+    El color predominante es el naranja
+    <span
+      [ngStyle]="{
+        background: color
+      }"
+      >naranja</span
+    >
+  </li>
+</ul>
